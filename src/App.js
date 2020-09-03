@@ -1,10 +1,10 @@
 import React from 'react';
-import './App.css';
+import ProductivityTracker from './containers/ProductivityTracker/ProductivityTracker';
 
 function App() {
   return (
-    <div className="App">
-      
+    <div>
+      <ProductivityTracker/>
     </div>
   );
 }
