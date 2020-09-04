@@ -57,8 +57,18 @@ class Activity extends Component {
         return (
             <div className='Activity'>
                 <h3 className='ActivityName'>{this.props.name}</h3>
-                <p>{this.displayTime(this.state.timerTime)}</p>
-                <p>{this.displayTime(this.state.stopwatchTime)}</p>
+                <p>
+                    <strong>Goal : </strong>
+                    {this.displayTime(this.props.duration)}
+                </p>
+                <p>
+                    <strong>Remaining : </strong>
+                    {this.displayTime(this.state.timerTime)}
+                </p>
+                <p>
+                    <strong>Elapsed : </strong>
+                    {this.displayTime(this.state.stopwatchTime)}
+                </p>
                 {timerButton}
             </div>
         );
