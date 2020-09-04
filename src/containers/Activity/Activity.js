@@ -49,13 +49,17 @@ class Activity extends Component {
     };
 
     render() {
+        let timerButton = <button onClick={this.startTimer}>Start</button>;
+        if(this.state.timerOn) {
+            timerButton = <button onClick={this.stopTimer}>Pause</button>;
+        }
+        
         return (
             <div className='Activity'>
                 <h3 className='ActivityName'>{this.props.name}</h3>
                 <p>{this.displayTime(this.state.timerTime)}</p>
                 <p>{this.displayTime(this.state.stopwatchTime)}</p>
-                <button onClick={this.startTimer}>Start</button>
-                <button onClick={this.stopTimer}>Pause</button>
+                {timerButton}
             </div>
         );
     }
