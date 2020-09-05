@@ -15,7 +15,7 @@ const addActivity = props => {
                 <div className={classes.FormControl}>
                     <label>
                         Goal:
-                        <input type="text" name="goal"/>
+                        <input type="number" name="goal"/>
                     </label>
                 </div>
                 <button 
