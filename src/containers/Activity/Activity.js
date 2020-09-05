@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import './Activity.css';
+
+import classes from './Activity.module.css';
 
 class Activity extends Component {
     state = {
@@ -55,8 +56,8 @@ class Activity extends Component {
         }
         
         return (
-            <div className='Activity'>
-                <h3 className='ActivityName'>{this.props.name}</h3>
+            <div className={classes.Activity}>
+                <h3 className={classes.ActivityName}>{this.props.name}</h3>
                 <p>
                     <strong>Goal : </strong>
                     {this.displayTime(this.props.duration)}
