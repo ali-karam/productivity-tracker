@@ -1,0 +1,26 @@
+.FormTitle {
+    text-align: center;
+}
+
+.FormControl label,
+.FormControl input {
+  display: block;
+  width: 100%;
+}
+
+.FormControl input {
+  font: inherit;
+  padding: 0.1rem 0.25rem;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  margin-bottom: 1rem;
+}
+
+.FormControl input:focus {
+  outline: none;
+  border-bottom-color: #ff2058;
+}
+
+.FormSubmit {
+    text-align: center;
+}
