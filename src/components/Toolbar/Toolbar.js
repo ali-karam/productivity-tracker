@@ -9,7 +9,6 @@ const toolbar = (props) => (
             <Logo/>
         </div>
         <h1 className={classes.PageTitle}>Productivity Tracker</h1>
-        <button className={classes.AddActivity} onClick={props.addActivity}>Add Activity</button>
     </header>
 );
 
