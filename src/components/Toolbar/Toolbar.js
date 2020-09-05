@@ -1,14 +1,15 @@
 import React from 'react';
-import './Toolbar.css';
-import Logo from '../Logo/Logo';
 
+import Logo from '../Logo/Logo';
+import classes from './Toolbar.module.css';
 
 const toolbar = (props) => (
-    <header className='Toolbar'>
-        <div className={'Logo'}>
+    <header className={classes.Toolbar}>
+        <div className={classes.Logo}>
             <Logo/>
         </div>
-        <h1 className='Title'>Productivity Tracker</h1>
+        <h1 className={classes.PageTitle}>Productivity Tracker</h1>
+        <button className={classes.AddActivity} onClick={props.addActivity}>Add Activity</button>
     </header>
 );
 
