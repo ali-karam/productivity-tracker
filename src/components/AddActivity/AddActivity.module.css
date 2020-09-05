@@ -22,5 +22,14 @@
 }
 
 .FormSubmit {
-    text-align: center;
+  background-color: #21212d;
+  color: white;
+  padding: 8px;
+  font: inherit;
+  font-weight: bold;
+  border: transparent;
+  border-radius: 3px;
+  cursor: pointer;
+  display: block;
+  margin: auto;
 }

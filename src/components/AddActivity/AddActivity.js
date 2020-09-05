@@ -18,9 +18,10 @@ const addActivity = props => {
                         <input type="text" name="goal"/>
                     </label>
                 </div>
-                <div className={classes.FormSubmit}>
-                    <button type="submit">Add Activity</button>
-                </div>
+                <button 
+                    className={classes.FormSubmit} 
+                    type="submit">Add Activity
+                </button>
             </form>
         </React.Fragment>
     );
