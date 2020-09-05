@@ -50,9 +50,11 @@ class Activity extends Component {
     };
 
     render() {
-        let timerButton = <button onClick={this.startTimer}>Start</button>;
+        let timerButton = <button className={classes.TimerButton} 
+            onClick={this.startTimer}>Start</button>;
         if(this.state.timerOn) {
-            timerButton = <button onClick={this.stopTimer}>Pause</button>;
+            timerButton = <button className={classes.TimerButton} 
+                onClick={this.stopTimer}>Pause</button>;
         }
         
         return (
