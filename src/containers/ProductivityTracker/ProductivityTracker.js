@@ -7,7 +7,21 @@ import classes from './ProductivityTracker.module.css';
 
 class ProductivityTracker extends Component {
     state = {
-        addingActivity: false
+        addingActivity: false,
+        activities: []
+    };
+
+    addActivityHandler = (activityData) => {
+        this.setState({
+            addingActivity: false,
+            activities: [
+                ...this.state.activities,
+                {
+                    activityName: activityData.activityName,
+                    goal: +activityData.goal
+                }
+            ]
+        });
     };
 
     showAddActivityForm = () => {
@@ -26,7 +40,7 @@ class ProductivityTracker extends Component {
                     onClick={this.showAddActivityForm}>Add Activity
                 </button>
                 <Modal show={this.state.addingActivity} modalClosed={this.hideAddActivityForm}>
-                    <AddActivity/>
+                    <AddActivity addActivity={this.addActivityHandler}/>
                 </Modal>
                 <Activity duration={1000 * 60 * 60 * 5} name="Study"/>
             </div>
