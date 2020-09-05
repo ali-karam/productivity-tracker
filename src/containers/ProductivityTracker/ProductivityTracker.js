@@ -10,11 +10,11 @@ class ProductivityTracker extends Component {
         addingActivity: false
     };
 
-    addActivityHandler = () => {
+    showAddActivityForm = () => {
         this.setState({addingActivity: true});
     };
 
-    cancelAddActivityHandler = () => {
+    hideAddActivityForm = () => {
         this.setState({addingActivity: false});
     };
 
@@ -23,9 +23,9 @@ class ProductivityTracker extends Component {
             <div>
                 <button 
                     className={classes.AddActivity} 
-                    onClick={this.addActivityHandler}>Add Activity
+                    onClick={this.showAddActivityForm}>Add Activity
                 </button>
-                <Modal show={this.state.addingActivity} modalClosed={this.cancelAddActivityHandler}>
+                <Modal show={this.state.addingActivity} modalClosed={this.hideAddActivityForm}>
                     <AddActivity/>
                 </Modal>
                 <Activity duration={1000 * 60 * 60 * 5} name="Study"/>
