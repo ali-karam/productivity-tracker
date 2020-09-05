@@ -33,6 +33,9 @@ class ProductivityTracker extends Component {
     };
 
     render() {
+        let activitiesList = this.state.activities.map((activity, index) => (
+            <Activity key={index} name={activity.activityName} duration={activity.goal}/>
+        ));
         return (
             <div>
                 <button 
@@ -42,7 +45,7 @@ class ProductivityTracker extends Component {
                 <Modal show={this.state.addingActivity} modalClosed={this.hideAddActivityForm}>
                     <AddActivity addActivity={this.addActivityHandler}/>
                 </Modal>
-                <Activity duration={1000 * 60 * 60 * 5} name="Study"/>
+                {activitiesList}
             </div>
         );
     }
