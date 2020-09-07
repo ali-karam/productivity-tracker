@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 
 import classes from './Activity.module.css';
+import Timer from '../../components/Timer/Timer';
 
 class Activity extends Component {
     state = {
@@ -50,29 +51,17 @@ class Activity extends Component {
     };
 
     render() {
-        let timerButton = <button className={classes.TimerButton} 
-            onClick={this.startTimer}>Start</button>;
-        if(this.state.timerOn) {
-            timerButton = <button className={classes.TimerButton} 
-                onClick={this.stopTimer}>Pause</button>;
-        }
-        
         return (
             <div className={classes.Activity}>
                 <h3 className={classes.ActivityName}>{this.props.name}</h3>
-                <p>
-                    <strong>Goal : </strong>
-                    {this.displayTime(this.props.duration)}
-                </p>
-                <p>
-                    <strong>Remaining : </strong>
-                    {this.displayTime(this.state.timerTime)}
-                </p>
-                <p>
-                    <strong>Elapsed : </strong>
-                    {this.displayTime(this.state.stopwatchTime)}
-                </p>
-                {timerButton}
+                <Timer 
+                    startTimer={this.startTimer} 
+                    stopTimer={this.stopTimer}
+                    goalTime={this.displayTime(this.props.duration)}
+                    remainingTime={this.displayTime(this.state.timerTime)}
+                    elapsedTime={this.displayTime(this.state.stopwatchTime)}
+                    timerOn={this.state.timerOn}
+                />
                 <button className={classes.DeleteButton} 
                     onClick={this.props.deleteActivity}>Delete
                 </button>

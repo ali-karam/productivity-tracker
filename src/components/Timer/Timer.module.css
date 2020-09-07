@@ -1,0 +1,9 @@
+.TimerButton {
+    background-color: #21212d;
+    color: white;
+    padding: 8px 25px;
+    font: inherit;
+    border: transparent;
+    border-radius: 3px;
+    cursor: pointer;
+}
