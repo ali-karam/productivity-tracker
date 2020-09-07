@@ -31,10 +31,7 @@ class Activity extends Component {
                 this.setState({
                     timerTime: newTime
                 });
-            } else {
-                clearInterval(this.timer);
-                this.setState({timerOn: false});
-            }
+            } 
         }, 1000);
     };
 
