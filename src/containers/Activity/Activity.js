@@ -12,6 +12,10 @@ class Activity extends Component {
         timerStart: 0
     };
 
+    componentWillUnmount() {
+        this.stopTimer();
+    }
+
     startTimer = () => {
         this.setState({
           timerOn: true,
