@@ -73,6 +73,9 @@ class Activity extends Component {
                     {this.displayTime(this.state.stopwatchTime)}
                 </p>
                 {timerButton}
+                <button className={classes.DeleteButton} 
+                    onClick={this.props.deleteActivity}>Delete
+                </button>
             </div>
         );
     }

@@ -24,6 +24,12 @@ class ProductivityTracker extends Component {
         });
     };
 
+    removeActivityHandler = (id) => {
+        const updatedActivities = [...this.state.activities];
+        updatedActivities.splice(id, 1);
+        this.setState({activities: updatedActivities});
+    };
+
     showAddActivityForm = () => {
         this.setState({addingActivity: true});
     };
@@ -34,7 +40,11 @@ class ProductivityTracker extends Component {
 
     render() {
         let activitiesList = this.state.activities.map((activity, index) => (
-            <Activity key={index} name={activity.activityName} duration={activity.goal}/>
+            <Activity 
+                key={index} 
+                name={activity.activityName} 
+                duration={activity.goal}
+                deleteActivity={() => this.removeActivityHandler(index)}/>
         ));
         return (
             <div>
