@@ -2,12 +2,15 @@ import React, {Component} from 'react';
 
 import Activity from '../Activity/Activity';
 import Modal from '../../components/UI/Modal/Modal';
-import AddActivity from '../../components/AddActivity/AddActivity';
+import AddActivity from '../../components/ActivityModals/AddActivity/AddActivity';
+import RemoveActivity from '../../components/ActivityModals/RemoveActivity/RemoveActivity';
 import classes from './ProductivityTracker.module.css';
 
 class ProductivityTracker extends Component {
     state = {
         addingActivity: false,
+        deletingActivity: false,
+        deleteActivityIndex: null,
         activities: []
     };
 
@@ -24,12 +27,6 @@ class ProductivityTracker extends Component {
         });
     };
 
-    removeActivityHandler = (id) => {
-        const updatedActivities = [...this.state.activities];
-        updatedActivities.splice(id, 1);
-        this.setState({activities: updatedActivities});
-    };
-
     showAddActivityForm = () => {
         this.setState({addingActivity: true});
     };
@@ -38,14 +35,40 @@ class ProductivityTracker extends Component {
         this.setState({addingActivity: false});
     };
 
+    deleteActivityHandler = (id) => {
+        this.setState({deletingActivity: true, deleteActivityIndex: id});
+    };
+
+    deleteConfirmHandler = () => {
+        if(this.state.deletingActivity && this.state.deleteActivityIndex !== null) {
+            const updatedActivities = [...this.state.activities];
+            updatedActivities.splice(this.state.deleteActivityIndex, 1);
+            this.setState({
+                activities: updatedActivities, 
+                deletingActivity: false, 
+                deleteActivityIndex: null
+            });
+        }
+    };
+
+    deleteCancelHandler = () => {
+        this.setState({deletingActivity: false, deleteActivityIndex: null});
+    };
+
     render() {
         let activitiesList = this.state.activities.map((activity, index) => (
             <Activity 
                 key={index} 
                 name={activity.activityName} 
                 duration={activity.goal}
-                deleteActivity={() => this.removeActivityHandler(index)}/>
+                deleteActivity={() => this.deleteActivityHandler(index)}/>
         ));
+        
+        let deleteActivityName = null;
+        if(this.state.deletingActivity) {
+            deleteActivityName = this.state.activities[this.state.deleteActivityIndex].activityName;
+        }
+
         return (
             <div>
                 <button 
@@ -55,6 +78,12 @@ class ProductivityTracker extends Component {
                 <Modal show={this.state.addingActivity} modalClosed={this.hideAddActivityForm}>
                     <AddActivity addActivity={this.addActivityHandler}/>
                 </Modal>
+                <Modal show={this.state.deletingActivity} modalClosed={this.deleteCancelHandler}>
+                    <RemoveActivity 
+                        cancel={this.deleteCancelHandler} 
+                        confirm={this.deleteConfirmHandler}
+                        activityName={deleteActivityName}/>
+                </Modal> 
                 {activitiesList}
             </div>
         );
