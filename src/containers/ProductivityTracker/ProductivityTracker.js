@@ -14,6 +14,34 @@ class ProductivityTracker extends Component {
         activities: []
     };
 
+    fetchActivitiesFromLocalStorage() {
+        if (localStorage.hasOwnProperty('activities')) {
+            let value = localStorage.getItem('activities');
+        try {
+            value = JSON.parse(value);
+            this.setState({ 'activities': value });
+        } catch (error) {
+            this.setState({ 'activities': value });
+        }
+        }
+    }
+
+    saveActivitiesToLocalStorage() {
+        localStorage.setItem('activities', JSON.stringify(this.state.activities));
+    }
+
+    componentDidMount() {
+        this.fetchActivitiesFromLocalStorage();
+        window.addEventListener("beforeunload",
+          this.saveActivitiesToLocalStorage.bind(this));
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("beforeunload",
+          this.saveActivitiesToLocalStorage.bind(this));
+        this.saveActivitiesToLocalStorage();
+    }
+
     addActivityHandler = (activityData) => {
         this.setState({
             addingActivity: false,
