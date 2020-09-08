@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 
+import * as actions from '../../store/actions/actions';
 import Activity from '../Activity/Activity';
 import Modal from '../../components/UI/Modal/Modal';
 import AddActivity from '../../components/ActivityModals/AddActivity/AddActivity';
@@ -10,49 +12,40 @@ class ProductivityTracker extends Component {
     state = {
         addingActivity: false,
         deletingActivity: false,
-        deleteActivityIndex: null,
-        activities: []
+        idToDelete: null
     };
 
-    fetchActivitiesFromLocalStorage() {
-        if (localStorage.hasOwnProperty('activities')) {
-            let value = localStorage.getItem('activities');
-        try {
-            value = JSON.parse(value);
-            this.setState({ 'activities': value });
-        } catch (error) {
-            this.setState({ 'activities': value });
-        }
-        }
-    }
+    // fetchActivitiesFromLocalStorage() {
+    //     if (localStorage.hasOwnProperty('activities')) {
+    //         let value = localStorage.getItem('activities');
+    //     try {
+    //         value = JSON.parse(value);
+    //         this.setState({ 'activities': value });
+    //     } catch (error) {
+    //         this.setState({ 'activities': value });
+    //     }
+    //     }
+    // }
 
-    saveActivitiesToLocalStorage() {
-        localStorage.setItem('activities', JSON.stringify(this.state.activities));
-    }
+    // saveActivitiesToLocalStorage() {
+    //     localStorage.setItem('activities', JSON.stringify(this.state.activities));
+    // }
 
-    componentDidMount() {
-        this.fetchActivitiesFromLocalStorage();
-        window.addEventListener("beforeunload",
-          this.saveActivitiesToLocalStorage.bind(this));
-    }
+    // componentDidMount() {
+    //     this.fetchActivitiesFromLocalStorage();
+    //     window.addEventListener("beforeunload",
+    //       this.saveActivitiesToLocalStorage.bind(this));
+    // }
 
-    componentWillUnmount() {
-        window.removeEventListener("beforeunload",
-          this.saveActivitiesToLocalStorage.bind(this));
-        this.saveActivitiesToLocalStorage();
-    }
+    // componentWillUnmount() {
+    //     window.removeEventListener("beforeunload",
+    //       this.saveActivitiesToLocalStorage.bind(this));
+    //     this.saveActivitiesToLocalStorage();
+    // }
 
     addActivityHandler = (activityData) => {
-        this.setState({
-            addingActivity: false,
-            activities: [
-                ...this.state.activities,
-                {
-                    activityName: activityData.activityName,
-                    goal: +activityData.goal
-                }
-            ]
-        });
+        this.setState({addingActivity: false});
+        this.props.onAddActivity(activityData.activityName, activityData.goal);
     };
 
     showAddActivityForm = () => {
@@ -64,37 +57,33 @@ class ProductivityTracker extends Component {
     };
 
     deleteActivityHandler = (id) => {
-        this.setState({deletingActivity: true, deleteActivityIndex: id});
+        this.setState({deletingActivity: true, idToDelete: id});
     };
 
     deleteConfirmHandler = () => {
-        if(this.state.deletingActivity && this.state.deleteActivityIndex !== null) {
-            const updatedActivities = [...this.state.activities];
-            updatedActivities.splice(this.state.deleteActivityIndex, 1);
-            this.setState({
-                activities: updatedActivities, 
-                deletingActivity: false, 
-                deleteActivityIndex: null
-            });
+        if(this.state.deletingActivity && this.state.idToDelete !== null) {
+            this.props.onDeleteActivity(this.state.idToDelete);
+            this.setState({deletingActivity: false, idToDelete: null});
         }
     };
 
     deleteCancelHandler = () => {
-        this.setState({deletingActivity: false, deleteActivityIndex: null});
+        this.setState({deletingActivity: false, idToDelete: null});
     };
 
     render() {
-        let activitiesList = this.state.activities.map((activity, index) => (
+        let activitiesList = this.props.activities.map(activity => (
             <Activity 
-                key={index} 
+                key={activity.id} 
                 name={activity.activityName} 
                 duration={activity.goal}
-                deleteActivity={() => this.deleteActivityHandler(index)}/>
+                deleteActivity={() => this.deleteActivityHandler(activity.id)}/>
         ));
         
         let deleteActivityName = null;
         if(this.state.deletingActivity) {
-            deleteActivityName = this.state.activities[this.state.deleteActivityIndex].activityName;
+            deleteActivityName = this.props.activities.find(activity => 
+                activity.id === this.state.idToDelete).activityName;
         }
 
         return (
@@ -110,7 +99,8 @@ class ProductivityTracker extends Component {
                     <RemoveActivity 
                         cancel={this.deleteCancelHandler} 
                         confirm={this.deleteConfirmHandler}
-                        activityName={deleteActivityName}/>
+                        activityName={deleteActivityName}
+                    />
                 </Modal> 
                 {activitiesList}
             </div>
@@ -118,4 +108,17 @@ class ProductivityTracker extends Component {
     }
 }
 
-export default ProductivityTracker;
+const mapStateToProps = state => {
+    return {
+        activities: state.activities
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onAddActivity: (activityName, goal) => dispatch(actions.addActivity(activityName, goal)),
+        onDeleteActivity: (index) => dispatch(actions.deleteActivity(index))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductivityTracker);
