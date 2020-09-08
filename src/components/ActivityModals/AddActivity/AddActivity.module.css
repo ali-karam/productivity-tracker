@@ -33,3 +33,14 @@
   display: block;
   margin: auto;
 }
+
+.FormSubmit:disabled {
+  color: white;
+  background-color: rgb(187, 184, 184);
+  cursor: not-allowed;
+}
+
+.Error {
+  text-align: center;
+  color: rgb(228, 86, 86);
+}
