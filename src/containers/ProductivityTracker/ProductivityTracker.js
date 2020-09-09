@@ -68,13 +68,15 @@ class ProductivityTracker extends Component {
             <Activity 
                 key={activity.id} 
                 id={activity.id}
+                idToDelete={this.state.idToDelete}
                 name={activity.activityName} 
                 duration={activity.goal}
                 stopwatchStart={activity.stopwatchStart}
                 stopwatchTime={activity.stopwatchTime}
                 timerStart={activity.timerStart}
                 timerTime={activity.timerTime}
-                deleteActivity={() => this.deleteActivityHandler(activity.id)}/>
+                deleteActivity={() => this.deleteActivityHandler(activity.id)}
+            />
         ));
         
         let deleteActivityName = null;

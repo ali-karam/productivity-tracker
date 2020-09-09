@@ -59,9 +59,11 @@ class Activity extends Component {
     };
 
     stopTimer = () => {
-        this.props.onSave(this.state.id, this.state.stopwatchStart,
-            this.state.stopwatchTime, this.state.timerStart, 
-                this.state.timerTime);
+        if(this.props.idToDelete !== this.props.id) {
+            this.props.onSave(this.state.id, this.state.stopwatchStart,
+                this.state.stopwatchTime, this.state.timerStart, 
+                    this.state.timerTime);
+        }
         this.setState({ timerOn: false });
         clearInterval(this.timer);
     };
