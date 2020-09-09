@@ -15,33 +15,25 @@ class ProductivityTracker extends Component {
         idToDelete: null
     };
 
-    // fetchActivitiesFromLocalStorage() {
-    //     if (localStorage.hasOwnProperty('activities')) {
-    //         let value = localStorage.getItem('activities');
-    //     try {
-    //         value = JSON.parse(value);
-    //         this.setState({ 'activities': value });
-    //     } catch (error) {
-    //         this.setState({ 'activities': value });
-    //     }
-    //     }
-    // }
+    saveActivitiesToLocalStorage() {
+        if(this.props.activities.length > 0) {
+            localStorage.setItem('activities', JSON.stringify(this.props.activities));
+        }
+    }
 
-    // saveActivitiesToLocalStorage() {
-    //     localStorage.setItem('activities', JSON.stringify(this.state.activities));
-    // }
+    componentDidMount() {
+        if(localStorage.hasOwnProperty('activities')) {
+            this.props.onInitializeActivity();
+        }
+        window.addEventListener("beforeunload",
+          this.saveActivitiesToLocalStorage.bind(this));
+    }
 
-    // componentDidMount() {
-    //     this.fetchActivitiesFromLocalStorage();
-    //     window.addEventListener("beforeunload",
-    //       this.saveActivitiesToLocalStorage.bind(this));
-    // }
-
-    // componentWillUnmount() {
-    //     window.removeEventListener("beforeunload",
-    //       this.saveActivitiesToLocalStorage.bind(this));
-    //     this.saveActivitiesToLocalStorage();
-    // }
+    componentWillUnmount() {
+        window.removeEventListener("beforeunload",
+          this.saveActivitiesToLocalStorage.bind(this));
+        this.saveActivitiesToLocalStorage();
+    }
 
     addActivityHandler = (activityData) => {
         this.setState({addingActivity: false});
@@ -75,8 +67,13 @@ class ProductivityTracker extends Component {
         let activitiesList = this.props.activities.map(activity => (
             <Activity 
                 key={activity.id} 
+                id={activity.id}
                 name={activity.activityName} 
                 duration={activity.goal}
+                stopwatchStart={activity.stopwatchStart}
+                stopwatchTime={activity.stopwatchTime}
+                timerStart={activity.timerStart}
+                timerTime={activity.timerTime}
                 deleteActivity={() => this.deleteActivityHandler(activity.id)}/>
         ));
         
@@ -85,7 +82,6 @@ class ProductivityTracker extends Component {
             deleteActivityName = this.props.activities.find(activity => 
                 activity.id === this.state.idToDelete).activityName;
         }
-
         return (
             <div>
                 <button 
@@ -117,7 +113,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onAddActivity: (activityName, goal) => dispatch(actions.addActivity(activityName, goal)),
-        onDeleteActivity: (index) => dispatch(actions.deleteActivity(index))
+        onDeleteActivity: (index) => dispatch(actions.deleteActivity(index)),
+        onInitializeActivity: () => dispatch(actions.initializeActivities())
     };
 };
 

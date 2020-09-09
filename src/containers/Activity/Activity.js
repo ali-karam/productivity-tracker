@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 
 import classes from './Activity.module.css';
 import Timer from '../../components/Timer/Timer';
+import * as actions from '../../store/actions/actions';
 
 class Activity extends Component {
     state = {
@@ -9,12 +11,29 @@ class Activity extends Component {
         stopwatchStart: 0,
         stopwatchTime: 0,
         timerTime: this.props.duration,
-        timerStart: 0
+        timerStart: 0,
+        id: this.props.id
     };
+
+    componentDidMount() {
+        this.initializeTimer();
+    }
 
     componentWillUnmount() {
         this.stopTimer();
     }
+
+    initializeTimer = () => {
+        if(this.props.stopwatchTime != null) {
+            this.setState({
+                timerOn: false,
+                stopwatchStart: this.props.stopwatchStart,
+                stopwatchTime: this.props.stopwatchTime,
+                timerTime: this.props.timerTime,
+                timerStart: this.props.timerStart
+            });
+        }
+    };
 
     startTimer = () => {
         this.setState({
@@ -40,6 +59,9 @@ class Activity extends Component {
     };
 
     stopTimer = () => {
+        this.props.onSave(this.state.id, this.state.stopwatchStart,
+            this.state.stopwatchTime, this.state.timerStart, 
+                this.state.timerTime);
         this.setState({ timerOn: false });
         clearInterval(this.timer);
     };
@@ -71,4 +93,12 @@ class Activity extends Component {
     }
 };
 
-export default Activity;
+const mapDispatchToProps = dispatch => {
+    return {
+        onSave: (id, stopwatchStart, stopwatchTime, timerStart, timerTime) => 
+            dispatch(actions.saveTime(id, stopwatchStart, stopwatchTime, 
+                timerStart, timerTime))
+    };
+};
+
+export default connect(null, mapDispatchToProps)(Activity);
