@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-import classes from './Activity.module.css';
-import Timer from '../../components/Timer/Timer';
+import Activity from '../../components/Activity/Activity';
 import * as actions from '../../store/actions/actions';
 
-class Activity extends Component {
+class Timer extends Component {
     state = {
         timerOn: false,
         stopwatchStart: 0,
@@ -77,20 +76,16 @@ class Activity extends Component {
 
     render() {
         return (
-            <div className={classes.Activity}>
-                <h3 className={classes.ActivityName}>{this.props.name}</h3>
-                <Timer 
-                    startTimer={this.startTimer} 
-                    stopTimer={this.stopTimer}
-                    goalTime={this.displayTime(this.props.duration)}
-                    remainingTime={this.displayTime(this.state.timerTime)}
-                    elapsedTime={this.displayTime(this.state.stopwatchTime)}
-                    timerOn={this.state.timerOn}
-                />
-                <button className={classes.DeleteButton} 
-                    onClick={this.props.deleteActivity}>Delete
-                </button>
-            </div>
+            <Activity
+                startTimer={this.startTimer} 
+                stopTimer={this.stopTimer}
+                goalTime={this.displayTime(this.props.duration)}
+                remainingTime={this.displayTime(this.state.timerTime)}
+                elapsedTime={this.displayTime(this.state.stopwatchTime)}
+                timerOn={this.state.timerOn}
+                name = {this.props.name}
+                deleteActivity = {this.props.deleteActivity}
+            />
         );
     }
 };
@@ -103,4 +98,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(null, mapDispatchToProps)(Activity);
+export default connect(null, mapDispatchToProps)(Timer);

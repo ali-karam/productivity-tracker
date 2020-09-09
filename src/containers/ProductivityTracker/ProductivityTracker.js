@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 import * as actions from '../../store/actions/actions';
-import Activity from '../Activity/Activity';
+import Timer from '../Timer/Timer';
 import Modal from '../../components/UI/Modal/Modal';
 import AddActivity from '../../components/ActivityModals/AddActivity/AddActivity';
 import RemoveActivity from '../../components/ActivityModals/RemoveActivity/RemoveActivity';
@@ -65,7 +65,7 @@ class ProductivityTracker extends Component {
 
     render() {
         let activitiesList = this.props.activities.map(activity => (
-            <Activity 
+            <Timer
                 key={activity.id} 
                 id={activity.id}
                 idToDelete={this.state.idToDelete}

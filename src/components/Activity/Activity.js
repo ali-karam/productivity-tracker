@@ -1,8 +1,8 @@
 import React from 'react';
 
-import classes from './Timer.module.css';
+import classes from './Activity.module.css';
 
-const timer = props => {
+const activity = props => {
     let timerButton = <button className={classes.TimerButton} 
     onClick={props.startTimer}>Start</button>;
 
@@ -11,7 +11,8 @@ const timer = props => {
             onClick={props.stopTimer}>Pause</button>;
     }
     return (
-        <React.Fragment>
+        <div className={classes.Activity}>
+            <h3 className={classes.ActivityName}>{props.name}</h3>
             <p>
                 <strong>Goal : </strong>
                 {props.goalTime}
@@ -25,8 +26,11 @@ const timer = props => {
                 {props.elapsedTime}
             </p>
             {timerButton}
-        </React.Fragment>
+            <button className={classes.DeleteButton} 
+                    onClick={props.deleteActivity}>Delete
+                </button>
+        </div>
     );
 };
 
-export default timer;
+export default activity;
