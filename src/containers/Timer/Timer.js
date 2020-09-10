@@ -17,6 +17,9 @@ class Timer extends Component {
 
     componentDidMount() {
         this.initializeTimer();
+        if(this.props.isDayTimer) {
+            this.startTimer();
+        }
     }
 
     componentWillUnmount() {
@@ -92,9 +95,9 @@ class Timer extends Component {
             timer = (
                 <TimeInDay
                     name={'Time In Day'}
-                    enteredTime={'10:00'}
-                    remainingTime={'5:00'}
-                    elapsedTime={'5:00'}
+                    enteredTime={this.displayTime(this.props.duration)}
+                    remainingTime={this.displayTime(this.state.timerTime)}
+                    elapsedTime={this.displayTime(this.state.stopwatchTime)}
                 />
             );
         }

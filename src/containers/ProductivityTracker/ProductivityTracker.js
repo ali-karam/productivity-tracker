@@ -86,7 +86,10 @@ class ProductivityTracker extends Component {
         }
         return (
             <div>
-                <Timer isDayTimer={true}/>
+                <Timer 
+                    isDayTimer={true} 
+                    duration={100000000000}
+                />
                 <button 
                     className={classes.AddActivity} 
                     onClick={this.showAddActivityForm}>Add Activity
