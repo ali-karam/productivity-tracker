@@ -1,0 +1,9 @@
+.Display {
+    margin: auto 40px;
+    display: inline;
+}
+
+.Display2 {
+    display: block;
+    margin: 15px auto;
+}
