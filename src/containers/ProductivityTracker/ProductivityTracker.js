@@ -86,6 +86,7 @@ class ProductivityTracker extends Component {
         }
         return (
             <div>
+                <Timer isDayTimer={true}/>
                 <button 
                     className={classes.AddActivity} 
                     onClick={this.showAddActivityForm}>Add Activity

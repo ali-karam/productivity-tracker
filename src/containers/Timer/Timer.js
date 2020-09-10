@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 import Activity from '../../components/Activity/Activity';
+import TimeInDay from '../../components/TimeInDay/TimeInDay';
 import * as actions from '../../store/actions/actions';
 
 class Timer extends Component {
@@ -75,7 +76,7 @@ class Timer extends Component {
     };
 
     render() {
-        return (
+        let timer = (
             <Activity
                 startTimer={this.startTimer} 
                 stopTimer={this.stopTimer}
@@ -86,6 +87,19 @@ class Timer extends Component {
                 name = {this.props.name}
                 deleteActivity = {this.props.deleteActivity}
             />
+        );
+        if(this.props.isDayTimer) {
+            timer = (
+                <TimeInDay
+                    name={'Time In Day'}
+                    enteredTime={'10:00'}
+                    remainingTime={'5:00'}
+                    elapsedTime={'5:00'}
+                />
+            );
+        }
+        return (
+            <React.Fragment>{timer}</React.Fragment>
         );
     }
 };
