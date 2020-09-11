@@ -1,11 +1,11 @@
 import React from 'react';
 
-import classes from './RemoveActivity.module.css';
+import classes from './ConfirmationMessage.module.css';
 
 const removeActivity = (props) => {
     return (
         <div>
-            <p className={classes.Message}>Are you sure you want to delete 
+            <p className={classes.Message}>Are you sure you want to {props.message} 
                 <span> {props.activityName}</span>?
             </p>
             <button className={classes.Confirm} onClick={props.confirm}>Yes</button>
