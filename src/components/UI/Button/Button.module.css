@@ -1,0 +1,52 @@
+.Button {
+    background-color: #21212d;
+    color: white;
+    font: inherit;
+    border: transparent;
+    border-radius: 3px;
+    padding: 8px 25px;
+    cursor: pointer;
+}
+
+.Button:disabled {
+    color: white;
+    background-color: rgb(187, 184, 184);
+    cursor: not-allowed;
+}
+
+.AddActivity, .ResetDayTimer {
+    padding: 10px;
+    font-weight: bold;
+    margin: 1px 40px;
+    font-size: 1.2rem;
+}
+
+.ResetDayTimer {
+    margin: 1px 20px;
+    float: right;
+}
+
+.FormSubmit, .SubmitStartDay {
+    padding: 8px;
+    font-weight: bold;
+    display: block;
+    margin: auto;
+}
+
+.SubmitStartDay {
+    margin: 17px auto 2px;
+}
+
+.Confirm {
+    margin: auto 15px;
+}
+
+.Cancel {
+    background-color: rgb(231, 63, 63);
+    margin: auto 90px;
+}
+
+.DeleteButton {
+    background-color: rgb(231, 63, 63);
+    float: right;
+}
