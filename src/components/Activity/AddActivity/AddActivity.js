@@ -115,7 +115,7 @@ class AddActivity extends Component {
         }  
         if(!this.state.duration.valid && this.state.duration.touched) {
             durationError = <p className={classes.Error}>
-                Please enter a value in the form of hh:mm or hh</p>
+                Please enter a value in the form of hh:mm or hh (Max value: 19:59)</p>
         }
 
         return (
