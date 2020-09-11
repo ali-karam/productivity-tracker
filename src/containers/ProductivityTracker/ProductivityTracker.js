@@ -38,7 +38,10 @@ class ProductivityTracker extends Component {
 
     saveActivitiesToLocalStorage() {
         if(this.props.activities.length > 0) {
-            localStorage.setItem('activities', JSON.stringify(this.props.activities));
+            setTimeout(() => {
+                localStorage.setItem('activities', 
+                    JSON.stringify(this.props.activities));
+            }, 10)
         }
     }
 
