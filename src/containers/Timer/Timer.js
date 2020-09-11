@@ -16,7 +16,7 @@ class Timer extends Component {
 
     componentDidMount() {
         this.initializeTimer();
-        window.addEventListener("beforeunload", this.stopTimer.bind(this));
+        window.addEventListener("beforeunload", this.stopTimer);
         if(this.props.isDayTimer) {
             this.initializeDayTimer().then(this.startTimer);
             window.addEventListener("beforeunload",
@@ -25,7 +25,8 @@ class Timer extends Component {
     }
 
     componentWillUnmount() {
-        window.removeEventListener("beforeunload", this.stopTimer.bind(this));
+        window.removeEventListener("beforeunload", this.stopTimer);
+        this.stopTimer();
         if(this.props.isDayTimer) {
             window.removeEventListener("beforeunload",
                 this.saveDayTimerToLocalStorage.bind(this));
