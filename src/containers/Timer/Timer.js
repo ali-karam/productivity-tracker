@@ -40,7 +40,7 @@ class Timer extends Component {
             timerTime: this.state.timerTime,
             timerStart: this.state.timerStart
         };
-        if(dayTimer.timerTime > 0) {
+        if(dayTimer.timerTime > 1800) {
             localStorage.setItem('dayTimer', JSON.stringify(dayTimer));
         } else {
             localStorage.removeItem('dayTimer');
