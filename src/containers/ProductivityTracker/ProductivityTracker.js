@@ -5,7 +5,7 @@ import * as actions from '../../store/actions/actions';
 import Timer from '../Timer/Timer';
 import Modal from '../../components/UI/Modal/Modal';
 import AddActivity from '../../components/ActivityModals/AddActivity/AddActivity';
-import RemoveActivity from '../../components/ActivityModals/RemoveActivity/RemoveActivity';
+import ConfirmationMessage from '../../components/UI/ConfirmationMessage/ConfirmationMessage';
 import StartDay from '../../components/TimeInDay/StartDay/StartDay';
 import classes from './ProductivityTracker.module.css';
 
@@ -13,7 +13,8 @@ class ProductivityTracker extends Component {
     state = {
         addingActivity: false,
         deletingActivity: false,
-        idToDelete: null
+        idToDelete: null,
+        resettingDayTimer: false
     };
 
     saveActivitiesToLocalStorage() {
@@ -69,6 +70,20 @@ class ProductivityTracker extends Component {
         this.setState({deletingActivity: false, idToDelete: null});
     };
 
+    resetDayTimerHandler = () => {
+        this.setState({resettingDayTimer: true});
+    };
+
+    resetConfirmHandler = () => {
+        this.props.onSetDayTimer(null);
+        localStorage.removeItem('dayTimer');
+        this.setState({resettingDayTimer: false});
+    }
+
+    resetCancelHandler = () => {
+        this.setState({resettingDayTimer: false});
+    };
+
     render() {
         let activitiesList = this.props.activities.map(activity => (
             <Timer
@@ -104,9 +119,21 @@ class ProductivityTracker extends Component {
             <div>
                 {dayTimer}
                 <button 
-                    className={classes.AddActivity} 
+                    className={classes.Button} 
                     onClick={this.showAddActivityForm}>Add Activity
                 </button>
+                <button 
+                    className={`${classes.Button} ${classes.ResetDayTimer}`}
+                    onClick={this.resetDayTimerHandler}>
+                    Reset Day Timer
+                </button>
+                <Modal show={this.state.resettingDayTimer} modalClosed={this.resetCancelHandler}>
+                    <ConfirmationMessage 
+                        cancel={this.resetCancelHandler} 
+                        confirm={this.resetConfirmHandler}
+                        message='reset the day timer'
+                    />
+                </Modal> 
                 <Modal show={this.props.dayTimerDuration === null}>
                     <StartDay addDayTime={this.props.onSetDayTimer}/>
                 </Modal>
@@ -114,10 +141,11 @@ class ProductivityTracker extends Component {
                     <AddActivity addActivity={this.addActivityHandler}/>
                 </Modal>
                 <Modal show={this.state.deletingActivity} modalClosed={this.deleteCancelHandler}>
-                    <RemoveActivity 
+                    <ConfirmationMessage 
                         cancel={this.deleteCancelHandler} 
                         confirm={this.deleteConfirmHandler}
                         activityName={deleteActivityName}
+                        message='delete'
                     />
                 </Modal> 
                 {activitiesList}

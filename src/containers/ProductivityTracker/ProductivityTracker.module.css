@@ -1,4 +1,4 @@
-.AddActivity {
+.Button {
     background-color: #21212d;
     color: white;
     padding: 10px;
@@ -9,4 +9,10 @@
     cursor: pointer;
     margin: 1px 40px;
     font-size: 1.2rem;
+}
+
+.ResetDayTimer {
+    margin: 1px 20px;
+    font-size: 1.2rem;
+    float: right;
 }
