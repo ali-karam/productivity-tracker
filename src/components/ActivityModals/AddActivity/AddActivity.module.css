@@ -21,25 +21,6 @@
   border-bottom-color: #ff2058;
 }
 
-.FormSubmit {
-  background-color: #21212d;
-  color: white;
-  padding: 8px;
-  font: inherit;
-  font-weight: bold;
-  border: transparent;
-  border-radius: 3px;
-  cursor: pointer;
-  display: block;
-  margin: auto;
-}
-
-.FormSubmit:disabled {
-  color: white;
-  background-color: rgb(187, 184, 184);
-  cursor: not-allowed;
-}
-
 .Error {
   text-align: center;
   color: rgb(228, 86, 86);

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import classes from './ConfirmationMessage.module.css';
+import Button from '../Button/Button';
 
 const removeActivity = (props) => {
     return (
@@ -8,8 +9,8 @@ const removeActivity = (props) => {
             <p className={classes.Message}>Are you sure you want to {props.message} 
                 <span> {props.activityName}</span>?
             </p>
-            <button className={classes.Confirm} onClick={props.confirm}>Yes</button>
-            <button className={classes.Cancel} onClick={props.cancel}>No</button>
+            <Button btnType='Confirm' clicked={props.confirm}>Yes</Button>
+            <Button btnType='Cancel' clicked={props.cancel}>No</Button>
         </div>
     );
 };

@@ -7,7 +7,7 @@ import Modal from '../../components/UI/Modal/Modal';
 import AddActivity from '../../components/ActivityModals/AddActivity/AddActivity';
 import ConfirmationMessage from '../../components/UI/ConfirmationMessage/ConfirmationMessage';
 import StartDay from '../../components/TimeInDay/StartDay/StartDay';
-import classes from './ProductivityTracker.module.css';
+import Button from '../../components/UI/Button/Button';
 
 class ProductivityTracker extends Component {
     state = {
@@ -118,15 +118,12 @@ class ProductivityTracker extends Component {
         return (
             <div>
                 {dayTimer}
-                <button 
-                    className={classes.Button} 
-                    onClick={this.showAddActivityForm}>Add Activity
-                </button>
-                <button 
-                    className={`${classes.Button} ${classes.ResetDayTimer}`}
-                    onClick={this.resetDayTimerHandler}>
+                <Button btnType='AddActivity'clicked={this.showAddActivityForm}>
+                    Add Activity
+                </Button>
+                <Button btnType='ResetDayTimer' clicked={this.resetDayTimerHandler}>
                     Reset Day Timer
-                </button>
+                </Button>
                 <Modal show={this.state.resettingDayTimer} modalClosed={this.resetCancelHandler}>
                     <ConfirmationMessage 
                         cancel={this.resetCancelHandler} 

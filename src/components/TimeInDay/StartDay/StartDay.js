@@ -1,6 +1,7 @@
 import React from 'react';
 
 import classes from './StartDay.module.css';
+import Button from '../../UI/Button/Button';
 
 const startDay = props => {
 
@@ -33,10 +34,7 @@ const startDay = props => {
                 Time you want to work until: 
                 <input type='time' name='enteredTime' required/>
             </label>
-            <button 
-                className={classes.FormSubmit} 
-                type='submit'>Submit
-            </button>
+            <Button btnType='SubmitStartDay' isSubmit>Submit</Button>
         </form>
     );
 };

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 
+import Button from '../../UI/Button/Button';
 import classes from './AddActivity.module.css';
 
 class AddActivity extends Component {
@@ -153,12 +154,11 @@ class AddActivity extends Component {
                         </label>
                         {durationError}
                     </div>
-                    <button 
-                        className={classes.FormSubmit} 
+                    <Button 
+                        btnType='FormSubmit' isSubmit
                         disabled={!this.state.activityName.valid || 
-                            !this.state.duration.valid}
-                        type="submit">Add Activity
-                    </button>
+                            !this.state.duration.valid}>Add Activity
+                    </Button>
                 </form>
             </React.Fragment>
         );
