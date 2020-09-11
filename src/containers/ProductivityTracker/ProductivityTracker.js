@@ -88,7 +88,7 @@ class ProductivityTracker extends Component {
             <div>
                 <Timer 
                     isDayTimer={true} 
-                    duration={100000000000}
+                    duration={100000}
                 />
                 <button 
                     className={classes.AddActivity} 

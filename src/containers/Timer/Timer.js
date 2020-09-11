@@ -18,12 +18,41 @@ class Timer extends Component {
     componentDidMount() {
         this.initializeTimer();
         if(this.props.isDayTimer) {
-            this.startTimer();
+            this.initializeDayTimer().then(this.startTimer);
+            window.addEventListener("beforeunload",
+            this.saveDayTimerToLocalStorage.bind(this));
         }
     }
 
     componentWillUnmount() {
         this.stopTimer();
+        if(this.props.isDayTimer) {
+            window.removeEventListener("beforeunload",
+                this.saveDayTimerToLocalStorage.bind(this));
+        }
+    }
+
+    saveDayTimerToLocalStorage() {
+        const dayTimer = {
+            duration: this.props.duration,
+            stopwatchStart: this.state.stopwatchStart,
+            stopwatchTime: this.state.stopwatchTime,
+            timerTime: this.state.timerTime,
+            timerStart: this.state.timerStart
+        };
+        if(dayTimer.timerTime > 0) {
+            localStorage.setItem('dayTimer', JSON.stringify(dayTimer));
+        } else {
+            localStorage.removeItem('dayTimer');
+        }
+    }
+
+    async initializeDayTimer() {
+        if(localStorage.hasOwnProperty('dayTimer')) {
+            let value = localStorage.getItem('dayTimer');
+            value = JSON.parse(value);
+            this.setState({...value});
+        }
     }
 
     initializeTimer = () => {
