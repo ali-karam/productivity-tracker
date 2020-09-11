@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import * as actions from '../../store/actions/actions';
 import Timer from '../Timer/Timer';
 import Modal from '../../components/UI/Modal/Modal';
-import AddActivity from '../../components/ActivityModals/AddActivity/AddActivity';
+import AddActivity from '../../components/Activity/AddActivity/AddActivity';
 import ConfirmationMessage from '../../components/UI/ConfirmationMessage/ConfirmationMessage';
 import StartDay from '../../components/TimeInDay/StartDay/StartDay';
 import Button from '../../components/UI/Button/Button';
