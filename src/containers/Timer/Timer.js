@@ -51,6 +51,8 @@ class Timer extends Component {
         if(localStorage.hasOwnProperty('dayTimer')) {
             let value = localStorage.getItem('dayTimer');
             value = JSON.parse(value);
+            value.stopwatchTime = Date.now() - value.stopwatchStart;
+            value.timerTime = value.duration - value.stopwatchTime
             this.setState({...value});
         }
     }
