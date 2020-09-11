@@ -1,7 +1,8 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
-    activities: []
+    activities: [],
+    dayTimerDuration: null
 };
 
 const addActivity = (state, action) => {
@@ -53,12 +54,21 @@ const initializeActivities = (state, action) => {
     }
 };
 
+const setDayTimerDuration = (state, action) => {
+    return {
+        ...state,
+        activities: [...state.activities],
+        dayTimerDuration: action.timerDuration
+    };
+};
+
 const reducer = (state = initialState, action) => {
     switch(action.type) {
         case actionTypes.ADD_ACTIVITY: return addActivity(state, action);
         case actionTypes.DELETE_ACTIVITY: return deleteActivity(state, action);
         case actionTypes.SAVE_TIME: return saveTime(state, action);
         case actionTypes.INITIALIZE_ACTIVITIES: return initializeActivities(state, action);
+        case actionTypes.SET_DAY_TIMER_DURATION: return setDayTimerDuration(state, action);
         default: return state;
     }
 };

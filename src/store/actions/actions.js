@@ -39,3 +39,10 @@ export const saveTime = (id, stopwatchStart, stopwatchTime, timerStart, timerTim
     };
 };
 
+export const setDayTimerDuration = (timerDuration) => {
+    return {
+        type: actionTypes.SET_DAY_TIMER_DURATION,
+        timerDuration: timerDuration
+    };
+};
+
