@@ -6,6 +6,7 @@ import Timer from '../Timer/Timer';
 import Modal from '../../components/UI/Modal/Modal';
 import AddActivity from '../../components/ActivityModals/AddActivity/AddActivity';
 import RemoveActivity from '../../components/ActivityModals/RemoveActivity/RemoveActivity';
+import StartDay from '../../components/TimeInDay/StartDay/StartDay';
 import classes from './ProductivityTracker.module.css';
 
 class ProductivityTracker extends Component {
@@ -64,6 +65,7 @@ class ProductivityTracker extends Component {
     };
 
     render() {
+        // console.log(this.props.dayTimerDuration)
         let activitiesList = this.props.activities.map(activity => (
             <Timer
                 key={activity.id} 
@@ -84,16 +86,26 @@ class ProductivityTracker extends Component {
             deleteActivityName = this.props.activities.find(activity => 
                 activity.id === this.state.idToDelete).activityName;
         }
+
+        let dayTimer = null;
+        if(this.props.dayTimerDuration !== null) {
+            dayTimer = (
+                <Timer 
+                isDayTimer={true} 
+                duration={this.props.dayTimerDuration}/>
+            );
+        }
+        
         return (
             <div>
-                <Timer 
-                    isDayTimer={true} 
-                    duration={100000}
-                />
+                {dayTimer}
                 <button 
                     className={classes.AddActivity} 
                     onClick={this.showAddActivityForm}>Add Activity
                 </button>
+                <Modal show={this.props.dayTimerDuration === null}>
+                    <StartDay addDayTime={this.props.onSetDayTimer}/>
+                </Modal>
                 <Modal show={this.state.addingActivity} modalClosed={this.hideAddActivityForm}>
                     <AddActivity addActivity={this.addActivityHandler}/>
                 </Modal>
@@ -112,15 +124,19 @@ class ProductivityTracker extends Component {
 
 const mapStateToProps = state => {
     return {
-        activities: state.activities
+        activities: state.activities,
+        dayTimerDuration: state.dayTimerDuration
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAddActivity: (activityName, goal) => dispatch(actions.addActivity(activityName, goal)),
+        onAddActivity: (activityName, goal) => 
+            dispatch(actions.addActivity(activityName, goal)),
         onDeleteActivity: (index) => dispatch(actions.deleteActivity(index)),
-        onInitializeActivity: () => dispatch(actions.initializeActivities())
+        onInitializeActivity: () => dispatch(actions.initializeActivities()),
+        onSetDayTimer: (timerDuration) => 
+            dispatch(actions.setDayTimerDuration(timerDuration))
     };
 };
 
