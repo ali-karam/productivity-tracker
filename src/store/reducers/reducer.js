@@ -39,7 +39,6 @@ const saveTime = (state, action) => {
                 id: action.id,
                 stopwatchStart: action.stopwatchStart,
                 stopwatchTime: action.stopwatchTime,
-                timerStart: action.timerStart,
                 timerTime: action.timerTime
             },
             ...state.activities.slice(index + 1)

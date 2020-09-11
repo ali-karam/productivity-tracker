@@ -115,7 +115,6 @@ class ProductivityTracker extends Component {
                 duration={activity.goal}
                 stopwatchStart={activity.stopwatchStart}
                 stopwatchTime={activity.stopwatchTime}
-                timerStart={activity.timerStart}
                 timerTime={activity.timerTime}
                 deleteActivity={() => this.deleteActivityHandler(activity.id)}
             />

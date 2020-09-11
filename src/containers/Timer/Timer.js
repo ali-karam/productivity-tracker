@@ -11,7 +11,6 @@ class Timer extends Component {
         stopwatchStart: 0,
         stopwatchTime: 0,
         timerTime: this.props.duration,
-        timerStart: 0,
         id: this.props.id
     };
 
@@ -37,8 +36,7 @@ class Timer extends Component {
             duration: this.props.duration,
             stopwatchStart: this.state.stopwatchStart,
             stopwatchTime: this.state.stopwatchTime,
-            timerTime: this.state.timerTime,
-            timerStart: this.state.timerStart
+            timerTime: this.state.timerTime
         };
         if(dayTimer.timerTime > 1800) {
             localStorage.setItem('dayTimer', JSON.stringify(dayTimer));
@@ -63,8 +61,7 @@ class Timer extends Component {
                 timerOn: false,
                 stopwatchStart: this.props.stopwatchStart,
                 stopwatchTime: this.props.stopwatchTime,
-                timerTime: this.props.timerTime,
-                timerStart: this.props.timerStart
+                timerTime: this.props.timerTime
             });
         }
     };
@@ -73,30 +70,23 @@ class Timer extends Component {
         this.setState({
           timerOn: true,
           stopwatchTime: this.state.stopwatchTime,
-          stopwatchStart: Date.now() - this.state.stopwatchTime,
-          timerTime: this.state.timerTime,
-          timerStart: this.state.timerTime
+          stopwatchStart: Date.now() - this.state.stopwatchTime
         });
 
         this.timer = setInterval(() => {
+            let newTime = this.state.timerTime - 1000;
+            newTime = newTime >= 0 ? newTime : this.state.timerTime;
             this.setState({
-                stopwatchTime: Date.now() - this.state.stopwatchStart
+                stopwatchTime: Date.now() - this.state.stopwatchStart,
+                timerTime: newTime
             });
-
-            const newTime = this.state.timerTime - 1000;
-            if(newTime >= 0) {
-                this.setState({
-                    timerTime: newTime
-                });
-            } 
         }, 1000);
     };
 
     stopTimer = () => {
         if(this.props.idToDelete !== this.props.id) {
             this.props.onSave(this.state.id, this.state.stopwatchStart,
-                this.state.stopwatchTime, this.state.timerStart, 
-                    this.state.timerTime);
+                this.state.stopwatchTime, this.state.timerTime);
         }
         this.setState({ timerOn: false });
         clearInterval(this.timer);
@@ -140,9 +130,9 @@ class Timer extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onSave: (id, stopwatchStart, stopwatchTime, timerStart, timerTime) => 
+        onSave: (id, stopwatchStart, stopwatchTime, timerTime) => 
             dispatch(actions.saveTime(id, stopwatchStart, stopwatchTime, 
-                timerStart, timerTime))
+                timerTime))
     };
 };
 
