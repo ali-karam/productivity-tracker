@@ -3,10 +3,23 @@
     width: 100%;
     margin: 0px auto 20px;
     text-align: center;
+    overflow: scroll;
 }
 
 .Dashboard p {
     margin: auto 10px;
     display: inline;
+}
+
+@media (max-width: 628px) {
+    .Dashboard p {
+        margin: auto 3px;
+    }
+}
+
+@media (max-width: 580px) {
+    .Dashboard p {
+        display: block;
+    }
 }
 
