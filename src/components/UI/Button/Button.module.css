@@ -22,7 +22,6 @@
 }
 
 .ResetDayTimer {
-    margin: 1px 20px;
     float: right;
 }
 
@@ -49,4 +48,22 @@
 .DeleteButton {
     background-color: rgb(231, 63, 63);
     float: right;
+}
+
+@media (max-width: 545px) {
+    .Confirm, .Cancel {
+        margin: auto 20px;
+    }
+}
+
+@media (max-width: 400px) {
+    .ResetDayTimer, .AddActivity {
+        margin: 1px 20px;
+    }
+}
+
+@media (max-width: 320px) {
+    .ResetDayTimer, .AddActivity, .Confirm, .Cancel {
+        margin: 1px 10px;
+    }
 }
