@@ -15,12 +15,15 @@ class Timer extends Component {
     };
 
     componentDidMount() {
-        this.initializeTimer();
         window.addEventListener("beforeunload", this.stopTimer);
         if(this.props.isDayTimer) {
             this.initializeDayTimer().then(this.startTimer);
             window.addEventListener("beforeunload",
             this.saveDayTimerToLocalStorage.bind(this));
+        } else if(this.props.timerOn){
+            this.initializeTimerIfOn().then(this.startTimer);
+        } else {
+            this.initializeTimer();
         }
     }
 
@@ -57,6 +60,20 @@ class Timer extends Component {
         }
     }
 
+    async initializeTimerIfOn() {
+        if(this.props.stopwatchTime != null) {
+            let value = {
+                stopwatchStart: this.props.stopwatchStart,
+                stopwatchTime: this.props.stopwatchTime,
+                timerTime: this.props.timerTime,
+                duration: this.props.duration
+            };
+            value.stopwatchTime = Date.now() - value.stopwatchStart;
+            value.timerTime = value.duration - value.stopwatchTime;
+            this.setState({...value});
+        }
+    }
+
     initializeTimer = () => {
         if(this.props.stopwatchTime != null) {
             this.setState({
@@ -88,7 +105,7 @@ class Timer extends Component {
     stopTimer = () => {
         if(this.props.idToDelete !== this.props.id) {
             this.props.onSave(this.state.id, this.state.stopwatchStart,
-                this.state.stopwatchTime, this.state.timerTime);
+                this.state.stopwatchTime, this.state.timerTime, this.state.timerOn);
         }
         this.setState({ timerOn: false });
         clearInterval(this.timer);
@@ -132,9 +149,9 @@ class Timer extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onSave: (id, stopwatchStart, stopwatchTime, timerTime) => 
+        onSave: (id, stopwatchStart, stopwatchTime, timerTime, timerOn) => 
             dispatch(actions.saveTime(id, stopwatchStart, stopwatchTime, 
-                timerTime))
+                timerTime, timerOn))
     };
 };
 

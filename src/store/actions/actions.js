@@ -28,13 +28,14 @@ export const initializeActivities = () => {
     };
 };
 
-export const saveTime = (id, stopwatchStart, stopwatchTime, timerTime) => {
+export const saveTime = (id, stopwatchStart, stopwatchTime, timerTime, timerOn) => {
     return {
         type: actionTypes.SAVE_TIME,
         id: id,
         stopwatchStart: stopwatchStart,
         stopwatchTime: stopwatchTime,
-        timerTime: timerTime
+        timerTime: timerTime,
+        timerOn: timerOn
     };
 };
 
