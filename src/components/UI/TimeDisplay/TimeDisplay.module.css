@@ -1,9 +1,28 @@
 .Display {
     margin: auto 40px;
     display: inline;
+    overflow: auto;
 }
 
 .Display2 {
     display: block;
     margin: 15px auto;
+}
+
+@media (max-width: 720px) {
+    .Display {
+        margin: 10px;
+    }
+}
+
+@media (max-width: 520px) {
+    .Display {
+        margin: 2px;
+    }
+}
+
+@media (max-width: 488px) {
+    .Display {
+        display: block;
+    }
 }
