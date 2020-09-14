@@ -139,13 +139,17 @@ class ProductivityTracker extends Component {
             <div>
                 {this.displayDayTimer()}
                 {this.displayDashboard()}
-                <Button btnType='AddActivity'clicked={this.showAddActivityForm}>
-                    Add Activity
-                </Button>
-                <Button btnType='ResetDayTimer' clicked={this.resetDayTimerHandler}>
-                    Reset Day Timer
-                </Button>
-                {this.displayActivitiesList()}
+                <div>
+                    <Button btnType='AddActivity'clicked={this.showAddActivityForm}>
+                        Add Activity
+                    </Button>
+                    <Button btnType='ResetDayTimer' clicked={this.resetDayTimerHandler}>
+                        Reset Day Timer
+                    </Button>
+                </div>
+                <div style={{display: 'flex', justifyContent: 'center', flexWrap: 'wrap'}}>
+                    {this.displayActivitiesList()}
+                </div>
 
                 <Modal show={this.props.dayTimerDuration === null}>
                     <StartDay addDayTime={this.props.onSetDayTimer}/>

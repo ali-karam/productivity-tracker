@@ -1,10 +1,11 @@
 .Activity {
     padding: 10px;
-    width: 50%;
     height: 180px;
     border-radius: 5px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-    margin: 0px auto 25px;
+    margin: 10px 10px 25px;
+    display: inline-block;
+    overflow: auto;
 }
 
 .ActivityName {
@@ -12,3 +13,20 @@
     text-align: center;
 }
 
+@media (min-width: 200px) {
+    .Activity {
+        width: 80%
+    }
+}
+
+@media (min-width: 470px) {
+    .Activity {
+        width: 40%
+    }
+}
+
+@media (min-width: 900px) {
+    .Activity {
+        width: 20%
+    }
+}
