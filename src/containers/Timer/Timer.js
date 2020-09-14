@@ -134,7 +134,6 @@ class Timer extends Component {
         if(this.props.isDayTimer) {
             timer = (
                 <TimeInDay
-                    name={'Time In Day'}
                     enteredTime={this.displayTime(this.props.duration)}
                     remainingTime={this.displayTime(this.state.timerTime)}
                     elapsedTime={this.displayTime(this.state.stopwatchTime)}
