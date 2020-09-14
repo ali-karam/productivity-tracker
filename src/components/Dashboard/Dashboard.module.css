@@ -1,0 +1,12 @@
+.Dashboard {
+    padding: 10px;
+    width: 100%;
+    margin: 0px auto 20px;
+    text-align: center;
+}
+
+.Dashboard p {
+    margin: auto 10px;
+    display: inline;
+}
+

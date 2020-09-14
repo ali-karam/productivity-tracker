@@ -8,6 +8,7 @@ import AddActivity from '../../components/Activity/AddActivity/AddActivity';
 import ConfirmationMessage from '../../components/UI/ConfirmationMessage/ConfirmationMessage';
 import StartDay from '../../components/TimeInDay/StartDay/StartDay';
 import Button from '../../components/UI/Button/Button';
+import Dashboard from '../../components/Dashboard/Dashboard';
 
 class ProductivityTracker extends Component {
     state = {
@@ -125,10 +126,19 @@ class ProductivityTracker extends Component {
         ));
     };
 
+    displayDashboard = () => {
+        let dashboard = null;
+        if(this.props.activities.length > 0) {
+           dashboard = <Dashboard activities={this.props.activities}/>;
+        }
+        return dashboard;
+    };
+
     render() {
         return (
             <div>
                 {this.displayDayTimer()}
+                {this.displayDashboard()}
                 <Button btnType='AddActivity'clicked={this.showAddActivityForm}>
                     Add Activity
                 </Button>
