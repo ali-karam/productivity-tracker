@@ -20,10 +20,10 @@ const dashboard = props => {
 
     return(
         <div className={classes.Dashboard}>
-            <p><strong>Number of activities : </strong>{props.activities.length}</p>
-            <p><strong>Total goal : </strong>{displayTime(totalGoal)}</p>
-            <p><strong>Time achieved : </strong>{displayTime(sumElapsed)}</p>
-            <p><strong>Time left : </strong>{displayTime(totalGoal - sumRemaining)}</p>
+            <p><strong>Total Activities : </strong>{props.activities.length}</p>
+            <p><strong>Total Goal : </strong>{displayTime(totalGoal)}</p>
+            <p><strong>Time Achieved : </strong>{displayTime(sumElapsed)}</p>
+            <p><strong>Time Left : </strong>{displayTime(totalGoal - sumRemaining)}</p>
         </div>
     );
 };
