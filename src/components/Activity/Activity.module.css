@@ -27,6 +27,12 @@
 
 @media (min-width: 900px) {
     .Activity {
+        width: 25%
+    }
+}
+
+@media (min-width: 1200px) {
+    .Activity {
         width: 20%
     }
 }
