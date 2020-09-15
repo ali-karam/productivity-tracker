@@ -10,7 +10,7 @@ const dashboard = props => {
 
     for(let activity of props.activities) {
         totalGoal += activity.goal;
-        sumRemaining += activity.stopwatchTime;
+        sumRemaining += activity.timerTime;
         sumElapsed += activity.stopwatchTime;
     }
     if(isNaN(sumRemaining) || isNaN(sumElapsed)) {
@@ -23,7 +23,7 @@ const dashboard = props => {
             <p><strong>Total Activities : </strong>{props.activities.length}</p>
             <p><strong>Total Goal : </strong>{displayTime(totalGoal)}</p>
             <p><strong>Time Achieved : </strong>{displayTime(sumElapsed)}</p>
-            <p><strong>Time Left : </strong>{displayTime(totalGoal - sumRemaining)}</p>
+            <p><strong>Time Left : </strong>{displayTime(sumRemaining)}</p>
         </div>
     );
 };
