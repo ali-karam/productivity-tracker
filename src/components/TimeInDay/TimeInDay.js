@@ -21,7 +21,7 @@ const timeInDay = props => {
     return (
         <div className={classes.TimeInDay}>
             <h2 className={classes.Header}>{displayDate()}</h2>
-            <TimeDisplay label='Time Needed' time={props.enteredTime}/>
+            <TimeDisplay label='Time Available' time={props.enteredTime}/>
             <TimeDisplay label='Remaining Time' time={props.remainingTime}/>
             <TimeDisplay label='Elapsed Time' time={props.elapsedTime}/>
         </div>
