@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import Activity from '../../components/Activity/Activity';
 import TimeInDay from '../../components/TimeInDay/TimeInDay';
 import * as actions from '../../store/actions/actions';
+import {displayTime} from '../../shared/time';
 
 class Timer extends Component {
     state = {
@@ -111,21 +112,14 @@ class Timer extends Component {
         clearInterval(this.timer);
     };
 
-    displayTime = (time) => {
-        let seconds = ("0" + (Math.floor(time / 1000) % 60)).slice(-2);
-        let minutes = ("0" + (Math.floor(time / 60000) % 60)).slice(-2);
-        let hours = ("0" + Math.floor(time / 3600000)).slice(-2);
-        return `${hours} : ${minutes} : ${seconds}`;
-    };
-
     render() {
         let timer = (
             <Activity
                 startTimer={this.startTimer} 
                 stopTimer={this.stopTimer}
-                goalTime={this.displayTime(this.props.duration)}
-                remainingTime={this.displayTime(this.state.timerTime)}
-                elapsedTime={this.displayTime(this.state.stopwatchTime)}
+                goalTime={displayTime(this.props.duration)}
+                remainingTime={displayTime(this.state.timerTime)}
+                elapsedTime={displayTime(this.state.stopwatchTime)}
                 timerOn={this.state.timerOn}
                 name = {this.props.name}
                 deleteActivity = {this.props.deleteActivity}
@@ -134,15 +128,13 @@ class Timer extends Component {
         if(this.props.isDayTimer) {
             timer = (
                 <TimeInDay
-                    enteredTime={this.displayTime(this.props.duration)}
-                    remainingTime={this.displayTime(this.state.timerTime)}
-                    elapsedTime={this.displayTime(this.state.stopwatchTime)}
+                    enteredTime={displayTime(this.props.duration)}
+                    remainingTime={displayTime(this.state.timerTime)}
+                    elapsedTime={displayTime(this.state.stopwatchTime)}
                 />
             );
         }
-        return (
-            <React.Fragment>{timer}</React.Fragment>
-        );
+        return <React.Fragment>{timer}</React.Fragment>;
     }
 };
 
