@@ -12,13 +12,19 @@
     display: inline;
 }
 
-@media (max-width: 628px) {
+@media (max-width: 767px) {
+    .Dashboard p {
+        margin: auto 5px;
+    }
+}
+
+@media (max-width: 717px) {
     .Dashboard p {
         margin: auto 3px;
     }
 }
 
-@media (max-width: 580px) {
+@media (max-width: 696px) {
     .Dashboard p {
         display: block;
     }

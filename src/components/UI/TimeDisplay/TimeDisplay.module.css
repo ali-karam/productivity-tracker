@@ -9,19 +9,19 @@
     margin: 15px auto;
 }
 
-@media (max-width: 720px) {
+@media (max-width: 868px) {
     .Display {
         margin: 10px;
     }
 }
 
-@media (max-width: 520px) {
+@media (max-width: 643px) {
     .Display {
-        margin: 2px;
+        margin: 5px;
     }
 }
 
-@media (max-width: 488px) {
+@media (max-width: 606px) {
     .Display {
         display: block;
     }
