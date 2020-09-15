@@ -1,9 +1,10 @@
 .Dashboard {
     padding: 10px;
-    width: 100%;
-    margin: 0px auto 20px;
+    width: 80%;
+    margin: 10px auto 20px;
     text-align: center;
     overflow: scroll;
+    border-bottom: 1px solid black;
 }
 
 .Dashboard p {

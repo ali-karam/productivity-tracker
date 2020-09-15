@@ -1,8 +1,9 @@
 .TimeInDay {
     padding: 10px;
-    width: 100%;
+    width: 80%;
     margin: 0px auto;
     text-align: center;
+    border-bottom: 1px solid black;
 }
 
 .Header {
