@@ -7,13 +7,28 @@ import * as actions from '../../store/actions/actions';
 import {displayTime} from '../../shared/time';
 
 class Timer extends Component {
-    state = {
-        timerOn: false,
-        stopwatchStart: 0,
-        stopwatchTime: 0,
-        timerTime: this.props.duration,
-        id: this.props.id
-    };
+
+    constructor(props) {
+        super(props);
+
+        if(this.props.stopwatchTime != null) {
+            this.state = {
+                timerOn: false,
+                stopwatchStart: this.props.stopwatchStart,
+                stopwatchTime: this.props.stopwatchTime,
+                timerTime: this.props.timerTime,
+                id: this.props.id
+            };
+        } else {
+            this.state = {
+                timerOn: false,
+                stopwatchStart: 0,
+                stopwatchTime: 0,
+                timerTime: this.props.duration,
+                id: this.props.id
+            }
+        }
+    }
 
     componentDidMount() {
         window.addEventListener("beforeunload", this.stopTimer);
@@ -23,9 +38,7 @@ class Timer extends Component {
             this.saveDayTimerToLocalStorage.bind(this));
         } else if(this.props.timerOn){
             this.initializeTimerIfOn().then(this.startTimer);
-        } else {
-            this.initializeTimer();
-        }
+        } 
     }
 
     componentWillUnmount() {
@@ -74,17 +87,6 @@ class Timer extends Component {
             this.setState({...value});
         }
     }
-
-    initializeTimer = () => {
-        if(this.props.stopwatchTime != null) {
-            this.setState({
-                timerOn: false,
-                stopwatchStart: this.props.stopwatchStart,
-                stopwatchTime: this.props.stopwatchTime,
-                timerTime: this.props.timerTime
-            });
-        }
-    };
 
     startTimer = () => {
         this.setState({
