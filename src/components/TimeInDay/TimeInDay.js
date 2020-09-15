@@ -6,7 +6,7 @@ import TimeDisplay from '../UI/TimeDisplay/TimeDisplay';
 const displayDate = () => {
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", 
         "Sep", "Oct", "Nov", "Dec"];
-    const days = ["Sun", "Mon", "Tues", "Wed", "Thu", "Fri", "Sat"];
+    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     
     let today = new Date();
     let dd = today.getDate();
