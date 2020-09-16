@@ -17,7 +17,7 @@ const dashboard = props => {
         sumRemaining = 0;
         sumElapsed = 0;
     }
-
+    
     return(
         <div className={classes.Dashboard}>
             <p><strong>Total Activities : </strong>{props.activities.length}</p>
@@ -28,4 +28,4 @@ const dashboard = props => {
     );
 };
 
-export default dashboard;
+export default React.memo(dashboard);
