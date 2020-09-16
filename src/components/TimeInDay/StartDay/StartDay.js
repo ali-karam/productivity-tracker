@@ -1,42 +1,66 @@
-import React from 'react';
+import React, {Component} from 'react';
 
 import classes from './StartDay.module.css';
 import Button from '../../UI/Button/Button';
 
-const startDay = props => {
+class StartDay extends Component {
+    state = {
+        error: false
+    }
 
-    const formSubmissionHandler = (event) => {
+    formSubmissionHandler = (event) => {
         event.preventDefault();
-        let duration = extractDuration(event.target.enteredTime.value);
-        props.addDayTime(duration);
+        if(this.isValidTime(event.target.enteredTime.value)) {
+            let duration = this.extractDuration(event.target.enteredTime.value);
+            this.props.addDayTime(duration);
+            this.setState({error: false});
+        } else {
+            this.setState({error: true});
+        }
     };
 
-    const addTimeToDate = (dateObject, time) => {
+    addTimeToDate = (dateObject, time) => {
         let splitDate = dateObject.toString().split(':');
         let date = splitDate[0].slice(0, -2);
         return new Date(date+ time);
     };
 
-    const extractDuration = (enteredTime) => {
+    extractDuration = (enteredTime) => {
         let today = new Date();
-        let goalTime = addTimeToDate(today, enteredTime);
+        let goalTime = this.addTimeToDate(today, enteredTime);
         
         if(goalTime - Date.now() <= 0) {
             today.setDate(new Date().getDate() + 1);
-            goalTime = addTimeToDate(today, enteredTime);
+            goalTime = this.addTimeToDate(today, enteredTime);
         }
         return goalTime - Date.now();
     };
 
-    return (
-        <form className={classes.StartDay} onSubmit={formSubmissionHandler}>
-            <label>
-                Time you want to work until: 
-                <input type='time' name='enteredTime' required/>
-            </label>
-            <Button btnType='SubmitStartDay' isSubmit>Submit</Button>
-        </form>
-    );
-};
+    isValidTime = (value) => {
+        const pattern = /(^(([0-1]?[0-9])|([2][0-3])):[0-5][0-9]$)|(^24:00$)/;
+        return pattern.test(value);
+    };
 
-export default startDay;
+    render() {
+        let errorMessage = null;
+        if(this.state.error) {
+            errorMessage = <p className={classes.Error}>Please enter a time 
+                in 24 hour format. Example: 17:30</p>;
+        }
+
+        return (
+            <form className={classes.StartDay} onSubmit={this.formSubmissionHandler}>
+                <label>
+                    Time you want to work until: 
+                    <input type='time' name='enteredTime' required 
+                        placeholder='Time in 24 hour format'
+                    />
+                </label>
+                {errorMessage}
+                <Button btnType='SubmitStartDay' isSubmit>Submit</Button>
+            </form>
+        );
+    }
+}
+
+export default StartDay;
