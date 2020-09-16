@@ -1,8 +1,19 @@
 import * as actionTypes from '../actions/actionTypes';
 
-const initialState = {
-    activities: [],
-    dayTimerDuration: null
+const defineInitialState = () => {
+    let initialState = {
+        activities: [],
+        dayTimerDuration: null
+    };
+    if(localStorage.hasOwnProperty('activities')) {
+        initialState.activities = JSON.parse(localStorage.getItem('activities'));
+    }
+    if(localStorage.hasOwnProperty('dayTimer')) {
+        let timerDuration = localStorage.getItem('dayTimer');
+        timerDuration = JSON.parse(timerDuration);
+        initialState.dayTimerDuration = timerDuration.duration;
+    }
+    return initialState;
 };
 
 const addActivity = (state, action) => {
@@ -47,13 +58,6 @@ const saveTime = (state, action) => {
     }
 };
 
-const initializeActivities = (state, action) => {
-    return {
-        ...state, 
-        activities: action.activitiesData
-    }
-};
-
 const setDayTimerDuration = (state, action) => {
     return {
         ...state,
@@ -62,12 +66,11 @@ const setDayTimerDuration = (state, action) => {
     };
 };
 
-const reducer = (state = initialState, action) => {
+const reducer = (state = defineInitialState(), action) => {
     switch(action.type) {
         case actionTypes.ADD_ACTIVITY: return addActivity(state, action);
         case actionTypes.DELETE_ACTIVITY: return deleteActivity(state, action);
         case actionTypes.SAVE_TIME: return saveTime(state, action);
-        case actionTypes.INITIALIZE_ACTIVITIES: return initializeActivities(state, action);
         case actionTypes.SET_DAY_TIMER_DURATION: return setDayTimerDuration(state, action);
         default: return state;
     }

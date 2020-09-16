@@ -19,14 +19,6 @@ class ProductivityTracker extends Component {
     };
 
     componentDidMount() {
-        if(localStorage.hasOwnProperty('activities')) {
-            this.props.onInitializeActivity();
-        }
-        if(localStorage.hasOwnProperty('dayTimer')) {
-            let timerDuration = localStorage.getItem('dayTimer');
-            timerDuration = JSON.parse(timerDuration);
-            this.props.onSetDayTimer(timerDuration.duration);
-        }
         window.addEventListener("beforeunload",
           this.saveActivitiesToLocalStorage.bind(this));
     }
@@ -42,7 +34,7 @@ class ProductivityTracker extends Component {
             setTimeout(() => {
                 localStorage.setItem('activities', 
                     JSON.stringify(this.props.activities));
-            }, 10)
+            }, 1);
         }
     }
 
@@ -189,7 +181,6 @@ const mapDispatchToProps = dispatch => {
         onAddActivity: (activityName, goal) => 
             dispatch(actions.addActivity(activityName, goal)),
         onDeleteActivity: (index) => dispatch(actions.deleteActivity(index)),
-        onInitializeActivity: () => dispatch(actions.initializeActivities()),
         onSetDayTimer: (timerDuration) => 
             dispatch(actions.setDayTimerDuration(timerDuration))
     };

@@ -19,15 +19,6 @@ export const deleteActivity = (id) => {
     };
 };
 
-export const initializeActivities = () => {
-    let activitiesData = localStorage.getItem('activities');
-    activitiesData = JSON.parse(activitiesData);
-    return {
-        type: actionTypes.INITIALIZE_ACTIVITIES,
-        activitiesData: activitiesData
-    };
-};
-
 export const saveTime = (id, stopwatchStart, stopwatchTime, timerTime, timerOn) => {
     return {
         type: actionTypes.SAVE_TIME,
