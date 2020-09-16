@@ -9,9 +9,14 @@ const defineInitialState = () => {
         initialState.activities = JSON.parse(localStorage.getItem('activities'));
     }
     if(localStorage.hasOwnProperty('dayTimer')) {
-        let timerDuration = localStorage.getItem('dayTimer');
-        timerDuration = JSON.parse(timerDuration);
-        initialState.dayTimerDuration = timerDuration.duration;
+        let dayTimer = JSON.parse(localStorage.getItem('dayTimer'));
+        let currentTimerTime = dayTimer.duration - 
+            (Date.now() - dayTimer.stopwatchStart);
+        if(currentTimerTime > 1000) {
+            initialState.dayTimerDuration = dayTimer.duration;
+        } else {
+            localStorage.removeItem('dayTimer');
+        }
     }
     return initialState;
 };
