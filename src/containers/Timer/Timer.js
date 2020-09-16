@@ -83,7 +83,7 @@ class Timer extends Component {
                 duration: this.props.duration
             };
             value.stopwatchTime = Date.now() - value.stopwatchStart;
-            value.timerTime = value.duration - value.stopwatchTime;
+            value.timerTime = value.duration - value.stopwatchTime + 1000;
             this.setState({...value});
         }
     }
