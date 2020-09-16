@@ -22,7 +22,7 @@ class StartDay extends Component {
     addTimeToDate = (dateObject, time) => {
         let splitDate = dateObject.toString().split(':');
         let date = splitDate[0].slice(0, -2);
-        return new Date(date+ time);
+        return new Date(date + time);
     };
 
     extractDuration = (enteredTime) => {
@@ -37,7 +37,7 @@ class StartDay extends Component {
     };
 
     isValidTime = (value) => {
-        const pattern = /(^(([0-1]?[0-9])|([2][0-3])):[0-5][0-9]$)|(^24:00$)/;
+        const pattern = /^(([0-1]?[0-9])|([2][0-3])):[0-5][0-9]$/;
         return pattern.test(value);
     };
 
