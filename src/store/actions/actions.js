@@ -9,10 +9,12 @@ export const addActivity = (name, goal) => {
 };
 
 export const deleteActivity = (id) => {
-    let activitiesData = localStorage.getItem('activities');
-    activitiesData = JSON.parse(activitiesData);
-    activitiesData = activitiesData.filter(activity => activity.id !== id);
-    localStorage.setItem('activities', JSON.stringify(activitiesData));
+    if(localStorage.hasOwnProperty('activities')) {
+        let activitiesData = localStorage.getItem('activities');
+        activitiesData = JSON.parse(activitiesData);
+        activitiesData = activitiesData.filter(activity => activity.id !== id);
+        localStorage.setItem('activities', JSON.stringify(activitiesData));
+    }
     return {
         type: actionTypes.DELETE_ACTIVITY,
         id: id
