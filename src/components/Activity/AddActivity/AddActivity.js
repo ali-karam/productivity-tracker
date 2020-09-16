@@ -31,12 +31,12 @@ class AddActivity extends Component {
     extractDuration = (userDuration) => {
         let seconds = 0;
         let hours = userDuration.match(/^[0-1]?[0-9]/);
-        let minutes = userDuration.match(/(?<=:)[0-5][0-9]$/);
+        let minutes = userDuration.match(/:([0-5][0-9])$/);
         if(hours) {
             seconds += parseInt(hours[0]) * 3600;
         }
         if(minutes) {
-            seconds += parseInt(minutes[0]) * 60;
+            seconds += parseInt(minutes[1]) * 60;
         }
         return seconds * 1000;
     };
